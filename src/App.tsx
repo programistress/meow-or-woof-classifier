@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import ImageUpload from './components/ImageUpload';
-import { ImageUpload as ImageUploadType } from './types';
+import ResultDisplay from './components/ResultDisplay';
+import { ImageUpload as ImageUploadType, PredictionResult } from './types';
 
 function App() {
   const [currentImage, setCurrentImage] = useState<ImageUploadType>({
@@ -11,9 +12,34 @@ function App() {
     error: null
   });
 
+  const [prediction, setPrediction] = useState<PredictionResult | null>(null); 
+  const [isProcessing, setIsProcessing] = useState(false);
+
   const handleImageUpload = (imageData: ImageUploadType) => {
     setCurrentImage(imageData);
+    setPrediction(null); // clear previous prediction
     console.log('Image uploaded:', imageData);
+  };
+
+  const simulateAnalysis = () => {
+    if (!currentImage.isValid || !currentImage.file) return;
+    
+    setIsProcessing(true);
+    
+    // Simulate AI processing delay
+    setTimeout(() => {
+      // Create fake result for testing
+      const fakeResult: PredictionResult = {
+        className: Math.random() > 0.5 ? 'cat' : 'dog',
+        confidence: 0.85 + Math.random() * 0.14, // Random confidence between 85-99%
+        message: Math.random() > 0.5 
+          ? "That's definitely a cute kitty! 🐱 Meow!" 
+          : "That's a good doggo right there! 🐶 Woof!"
+      };
+      
+      setPrediction(fakeResult);
+      setIsProcessing(false);
+    }, 2000); // 2 second delay
   };
 
   return (
@@ -34,14 +60,21 @@ function App() {
           onImageUpload={handleImageUpload}
           currentImage={currentImage}
         />
-        
-        {currentImage.isValid && (
-          <div style={{ marginTop: '20px', padding: '15px', background: '#f0f8ff', borderRadius: '10px' }}>
-            <h3>Upload Success! 🎉</h3>
-            <p>File: {currentImage.file?.name}</p>
-            <p>Size: {currentImage.file ? Math.round(currentImage.file.size / 1024) : 0} KB</p>
-          </div>
+
+        {currentImage.isValid && currentImage.file && (
+          <button
+            className="analyze-button"
+            onClick={simulateAnalysis}
+            disabled={isProcessing} // disable button if processing
+          >
+            {isProcessing ? 'Analyzing...' : '✨ Analyze Pet ✨'}
+          </button>
         )}
+
+        <ResultDisplay 
+          result={prediction}
+          isProcessing={isProcessing}
+        />
       </div>
     </div>
   );
