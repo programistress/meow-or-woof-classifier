@@ -28,22 +28,26 @@ const ResultDisplay = ({ result, isProcessing }: ResultDisplayProps) => {
   return (
     <div className="result-container">
       <div className="result-title">
-        🎉 Analysis Complete!
+        Analysis Complete!
       </div>
       
       <div className={`result-prediction result-${result.className}`}>
-        {result.className === 'cat' && '🐱 CAT!'}
-        {result.className === 'dog' && '🐶 DOG!'}
-        {result.className === 'uncertain' && '🤷‍♀️ UNCERTAIN'}
+        {result.className === 'cat' && 'CAT! ₍^. .^₎⟆ '}
+        {result.className === 'dog' && 'DOG! ₊˚⊹ ᰔ'}
+        {result.className === 'uncertain' && 'UNCERTAIN (◞‸ ◟)'}
       </div>
       
-      <div className="result-confidence">
-        Confidence: {Math.round(result.confidence * 100)}%
-      </div>
-      
-      <div className="result-message">
-        {result.message}
-      </div>
+      {result.className !== 'uncertain' && (
+        <>
+          <div className="result-confidence">
+            Confidence: {Math.round(result.confidence * 100)}%
+          </div>
+          
+          <div className="result-message">
+            {result.message}
+          </div>
+        </>
+      )}
     </div>
   );
 };

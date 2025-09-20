@@ -68,12 +68,16 @@ function App() {
     <div className="app">
       <div className="header">
         <h1 className="title">
-          <span className="emoji">🐱</span>
+          <img src="/8034215cbfcaaf86667e220f532cf531.jpg" alt="Dog" className="title-pet-icon" />
           Meow or Woof?
-          <span className="emoji">🐶</span>
+          <img src="/5a93d7652e4f829d96d2aa0e0548c139.jpg" alt="Cat" className="title-pet-icon" />
+
         </h1>
         <p className="subtitle">
           Upload a photo of your adorable pet!
+        </p>
+        <p className="description">
+          Our AI-powered classifier will instantly tell you whether your furry friend is a cat or dog with incredible accuracy.
         </p>
       </div>
 
@@ -109,7 +113,7 @@ function App() {
                 onClick={analyzeImage}
                 disabled={isProcessing}
               >
-                {isProcessing ? 'Analyzing...' : '✨ Analyze Pet ✨'}
+                {isProcessing ? 'Analyzing...' : 'Analyze Pet ^_^'}
               </button>
             )}
 
