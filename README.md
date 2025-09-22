@@ -7,6 +7,10 @@ A cute and modern AI-powered pet classifier that instantly tells you whether you
 ![React](https://img.shields.io/badge/React-18+-61dafb)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5+-3178c6)
 
+## 🚀 Live Demo
+
+Try the app now: **[Meow or Woof Classifier](https://meow-or-woof-classifier.vercel.app/)**
+
 ## Features
 
 - 🤖 **AI-Powered Classification** - Uses TensorFlow.js for real-time pet recognition
